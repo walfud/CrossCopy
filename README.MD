@@ -1,5 +1,9 @@
-# 私有化部署
-todo... 
+![](./logo.png)
+
+# Android
+![](./android-install.png)
+
+http://fir.walfud.com/jz6h
 
 # 命令行
 
@@ -7,16 +11,21 @@ todo...
 sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/walfud/CrossCopy/main/Cmd/install.sh)"
 ```
 
+tips: 因写入 `/usr/local/bin` 所以需要 sudo 权限. 
+
 ```shell
 
-cc config token="ba32723b-adf1-4809-996d-b1ee8511b86e"
+ccx config token="ba32723b-adf1-4809-996d-b1ee8511b86e"
 
-cc ls
+ccx ls
 
-cc upload "this is a text"
+ccx upload "this is a text"
 
-cc upload -f "/home/cc/logo.png"
+ccx upload -f "/home/cc/logo.png"
 
-cc download "/home/cc/logo.png"
+ccx download "/home/cc/logo.png"
 
 ```
+
+# 私有化部署
+todo... 
