@@ -55,13 +55,10 @@ if (localPropertiesFile.exists()) {
     githubRelease {
         token(properties["GITHUB_TOKEN"] as String) // This is your personal access token with Repo permissions
         owner("walfud")                             // default is the last part of your group. Eg group: "com.github.breadmoirai" => owner: "breadmoirai"
-        repo("HelloInterpolator")                   // by default this is set to your project name
+        repo(rootProject.name)                      // by default this is set to your project name
         overwrite(true)                             // by default false; if set to true, will delete an existing release with the same tag and name
         releaseAssets(tasks.getByName("distZip").outputs.files) // this points to which files you want to upload as assets with your release, by default this is empty
         body("")                                    // by default this is empty
-
-
-        targetCommitish("master")                   // by default this is set to "main"
     }
     tasks.getByName("githubRelease").dependsOn("distZip")
 }

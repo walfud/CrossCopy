@@ -4,7 +4,7 @@ todo...
 # 命令行
 
 ```shell
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/walfud/CrossCopy/main/Cmd/install.sh)"
 ```
 
 ```shell

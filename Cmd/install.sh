@@ -2,14 +2,14 @@
 
 # env
 installDir=/usr/local/bin/cc
-version=$(curl -H "Accept: application/vnd.github+json" https://api.github.com/repos/walfud/HelloInterpolator/releases/latest | grep '"tag_name":' | head -1 | sed -e 's/^.*v//' | sed -e 's/".*$//')
+version=$(curl -H "Accept: application/vnd.github+json" https://api.github.com/repos/walfud/CrossCopy/releases/latest | grep '"tag_name":' | head -1 | sed -e 's/^.*v//' | sed -e 's/".*$//')
 
 echo $version
 
 # download
 tmpDir=/tmp/com.walfud.crosscopy
 mkdir -p "$tmpDir"
-curl -o "$tmpDir/cc.zip" -L https://walfud-shanghai.oss-cn-shanghai.aliyuncs.com/cc-1.0.0.zip
+curl -o "$tmpDir/cc.zip" -L https://github.com/walfud/CrossCopy/releases/download/v"$version"/cc-"$version".zip
 unzip -o -d "$tmpDir" "$tmpDir/cc.zip"
 
 mkdir -p "$installDir"
