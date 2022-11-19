@@ -1,3 +1,5 @@
+import java.util.*
+
 plugins {
     id("com.android.application").version("7.2.0").apply(true)
     id("org.jetbrains.kotlin.android").version("1.7.10").apply(true)
@@ -15,10 +17,32 @@ android {
         versionName = "1.0.0"
     }
 
+    signingConfigs {
+        val localPropertiesFile = file("local.properties")
+        if (localPropertiesFile.exists()) {
+            create("release") {
+                val properties = Properties().apply {
+                    localPropertiesFile.inputStream().use {
+                        load(it)
+                    }
+                }
+
+                storeFile = file("${projectDir}/keystore.jks")
+                storePassword = properties["KEYSTORE_PASSWORD"] as String
+                keyAlias = "cc"
+                keyPassword = properties["KEYSTORE_PASSWORD"] as String
+            }
+        }
+    }
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+
+            val localPropertiesFile = file("local.properties")
+            if (localPropertiesFile.exists()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 

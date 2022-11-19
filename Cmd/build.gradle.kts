@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.distsDirectory
 import java.util.*
 
 plugins {
