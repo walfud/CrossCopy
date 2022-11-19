@@ -1,0 +1,34 @@
+services:
+  cc:
+    container_name: cc
+    image: walfud/dockers:jdk17_gradle7.5.1
+    restart: unless-stopped
+    working_dir: /CrossCopy
+    volumes:
+      - ..:/CrossCopy
+      - scaffold-gradle-caches:/root/.gradle/caches
+    entrypoint: sh -c "chmod +x ./gradlew && ./gradlew :Server:clean :Server:buildFatJar && java '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005' -jar /CrossCopy/Server/build/libs/Server-all.jar"
+    #entrypoint: sh -c "chmod +x ./gradlew && ./gradlew :Server:clean :Server:build && ./gradlew :Server:run"
+    env_file: .env
+    ports:
+      - 18345:8080
+      - 18346:5005
+    logging:
+      options:
+        max-size: "100m"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 1gb
+    memswap_limit: 4gb
+    networks:
+      - scaffold
+
+volumes:
+  scaffold-gradle-caches:
+    external: true
+
+networks:
+  scaffold:
+    external: true
