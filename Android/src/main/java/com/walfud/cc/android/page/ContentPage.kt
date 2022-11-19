@@ -73,7 +73,7 @@ fun ContentPage(vm: ContentViewModel) {
         snackbarHost = { SnackbarHost(vm.snackbarHostState) },
     ) { innerPadding ->
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize().padding(innerPadding)
         ) {
             SwipeRefresh(
                 state = vm.swipeRefreshState,
