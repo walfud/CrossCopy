@@ -4,7 +4,6 @@ import com.walfud.cc.projectshare.model.Thing
 import com.walfud.cc.projectshare.model.ThingDownloadFileRequest
 import com.walfud.cc.projectshare.model.ThingUploadTextRequest
 import com.walfud.cc.projectshare.model.TokenResponse
-import com.walfud.extention.isUuid
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.content.*
@@ -18,9 +17,7 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.coroutines.runBlocking
 import java.io.File
 
-//const val CC_URL = "https://cc.walfud.com"
-const val CC_URL = "http://walfud.com:18345"
-//const val CC_URL = "http://192.168.0.101:8080"
+const val CC_URL = "https://cc.walfud.com"
 const val NEW_TOKEN_URL = "$CC_URL/token/new"
 const val THING_LIST_URL = "$CC_URL/thing/list"
 const val THING_UPLOAD_TEXT_URL = "$CC_URL/thing/upload/text"
