@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.walfud.cc.cmd"
-version = "1.0.0"
+version = "1.0.1"
 
 val cliVersion: String by project
 val serializationVersion: String by project
