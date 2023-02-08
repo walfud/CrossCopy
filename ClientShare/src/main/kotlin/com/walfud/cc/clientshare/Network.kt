@@ -16,6 +16,7 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.coroutines.runBlocking
 import java.io.File
+import java.util.concurrent.TimeUnit
 
 const val CC_URL = "https://cc.walfud.com"
 const val NEW_TOKEN_URL = "$CC_URL/token/new"
@@ -38,6 +39,7 @@ val httpClient = HttpClient(CIO) {
             }
         }
     }
+    install(HttpTimeout)
 }
 
 fun getTokenFromServerSync(): String = runBlocking { getTokenFromServer() }
@@ -87,8 +89,13 @@ suspend fun uploadFileToServer(name: String, file: File, listener: ProgressListe
                 },
             )
         )
+
         onUpload { bytesSentTotal, contentLength ->
             listener(bytesSentTotal, contentLength)
+        }
+
+        timeout {
+            requestTimeoutMillis = HttpTimeout.INFINITE_TIMEOUT_MS
         }
     }
     if (!response.status.isSuccess()) {
@@ -108,6 +115,10 @@ suspend fun downloadFileFromServer(serverFilename: String, localFile: File, list
 
         onDownload { bytesSentTotal, contentLength ->
             listener(bytesSentTotal, contentLength)
+        }
+
+        timeout {
+            requestTimeoutMillis = HttpTimeout.INFINITE_TIMEOUT_MS
         }
     }
     if (!response.status.isSuccess()) {
