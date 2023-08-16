@@ -46,7 +46,9 @@ fun Route.thingRoute() {
                 val storageFullPath = getStorageFile(session.id, filename)
                 withContext(Dispatchers.IO) {
                     Files.createDirectories(storageFullPath.parentFile.toPath())
-                    storageFullPath.writeBytes(filePart.streamProvider().readBytes())
+                    storageFullPath.outputStream().use {
+                        filePart.streamProvider().copyTo(it)
+                    }
                 }
                 multiparts.forEach { it.dispose() }
 
